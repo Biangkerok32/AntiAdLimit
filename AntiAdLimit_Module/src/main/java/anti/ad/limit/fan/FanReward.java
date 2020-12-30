@@ -51,7 +51,7 @@ public class FanReward {
             newUnitId = "IMG_16_9_APP_INSTALL#" + unitId;
 
         rewardedVideoAd = new RewardedVideoAd(context, newUnitId);
-        rewardedVideoAd.setAdListener(new RewardedVideoAdExtendedListener() {
+        RewardedVideoAdListener adListener = new RewardedVideoAdListener() {
             @Override
             public void onRewardedVideoActivityDestroyed() {
                 Log.d(TAG, "Fan Reward Video Activity Destroyed");
@@ -109,14 +109,18 @@ public class FanReward {
                 if (PrefUtils.getInstance().init(context, unitId).getHideOnClick())
                     hide();
             }
-        });
+        };
+        
+        RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig = rewardedVideoAd.buildLoadAdConfig()
+              .withAdListener(adListener)
+              .build();
 
         // Check if Ad is Banned
         if (!AdLimitUtils.isBanned(context, unitId)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    rewardedVideoAd.loadAd();
+                    rewardedVideoAd.loadAd(loadAdConfig);
                 }
             }, PrefUtils.getInstance().init(context, unitId).getDelayMs());
         } else {
