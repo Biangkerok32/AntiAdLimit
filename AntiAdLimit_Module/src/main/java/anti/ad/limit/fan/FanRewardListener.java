@@ -8,8 +8,6 @@ public interface FanRewardListener {
 
     void onAdBanned();
 
-    void onRewardedVideoActivityDestroyed();
-
     void onRewardedVideoCompleted();
 
     void onLoggingImpression();
