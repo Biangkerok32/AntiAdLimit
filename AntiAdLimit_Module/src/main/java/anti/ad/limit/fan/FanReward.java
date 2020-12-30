@@ -53,13 +53,6 @@ public class FanReward {
         rewardedVideoAd = new RewardedVideoAd(context, newUnitId);
         RewardedVideoAdListener adListener = new RewardedVideoAdListener() {
             @Override
-            public void onRewardedVideoActivityDestroyed() {
-                Log.d(TAG, "Fan Reward Video Activity Destroyed");
-                if (fanRewardListener != null)
-                    fanRewardListener.onRewardedVideoActivityDestroyed();
-            }
-
-            @Override
             public void onRewardedVideoCompleted() {
                 Log.d(TAG, "Success: Reward Video Completed");
                 if (fanRewardListener != null)
