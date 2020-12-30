@@ -3,7 +3,12 @@ package anti.ad.limit.fan;
 import android.content.Context;
 import android.util.Log;
 
-import com.facebook.ads.*;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 
 import android.os.Handler;
 import android.view.View;
@@ -24,6 +29,7 @@ public class FanBanner {
     private AdView adView;
     private Context context;
     private LinearLayout adContainer;
+    private AdListener adListener;
     private String placementId;
     private boolean testEnabled = false;
     private boolean isAdLoaded = false;
@@ -83,7 +89,7 @@ public class FanBanner {
 
         adView = new AdView(context, newPlacementId, adSize1);
         adContainer.addView(adView);
-        adView.setAdListener(new AdListener() {
+        AdListener adListener = new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
                 Log.e(TAG, "Error: Loading Fan Banner");
@@ -119,6 +125,11 @@ public class FanBanner {
                 if (fanBannerListener != null)
                     fanBannerListener.onImpressionLogged();
             }
+            
+            AdView.AdViewLoadConfig loadAdConfig = adView.buildLoadAdConfig()
+              .withAdListener(adListener)
+              .build();
+	        adView.loadAd(loadAdConfig);
         });
 
         // Check if Ad is Banned
