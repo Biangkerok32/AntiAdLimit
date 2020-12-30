@@ -4,10 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.RewardedVideoAd;
-import com.facebook.ads.RewardedVideoAdExtendedListener;
+import com.facebook.ads.*;
 
 import anti.ad.limit.AdLimitUtils;
 import anti.ad.limit.PrefUtils;
