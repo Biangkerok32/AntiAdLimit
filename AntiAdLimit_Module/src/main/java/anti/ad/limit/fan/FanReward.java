@@ -104,7 +104,7 @@ public class FanReward {
             }
         };
         
-        RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig = rewardedVideoAd.buildLoadAdConfig()
+        final RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig = rewardedVideoAd.buildLoadAdConfig()
               .withAdListener(adListener)
               .build();
 
