@@ -26,6 +26,7 @@ public class FanInters {
     private boolean isAdBanned = false;
 
     private InterstitialAd interstitialAd;
+    private InterstitialAd.InterstitialLoadAdConfig loadAdConfig;
 
     public FanInters(final Context context) {
         this.context = context;
@@ -52,7 +53,7 @@ public class FanInters {
             newPlacementId = "IMG_16_9_APP_INSTALL#" + unitId;
 
         interstitialAd = new InterstitialAd(context, newPlacementId);
-        interstitialAd.setAdListener(new AbstractAdListener() {
+        InterstitialAdListener adListener = new InterstitialAdListener() {
             @Override
             public void onError(Ad ad, AdError error) {
                 Log.e(TAG, "Error: Loading Fan Interstitial");
@@ -102,6 +103,9 @@ public class FanInters {
                 if (fanIntersLisntener != null)
                     fanIntersLisntener.onDismissed();
             }
+            InterstitialAd.InterstitialLoadAdConfig loadAdConfig = interstitialAd.buildLoadAdConfig()
+              .withAdListener(adListener)
+              .build();
         });
 
         // Check if Ad is Banned
@@ -110,7 +114,7 @@ public class FanInters {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    interstitialAd.loadAd();
+                    interstitialAd.loadAd(loadAdConfig);
                 }
             }, PrefUtils.getInstance().init(context, unitId).getDelayMs());
         } else {
