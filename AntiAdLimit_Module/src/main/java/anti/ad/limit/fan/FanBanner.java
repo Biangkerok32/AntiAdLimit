@@ -126,11 +126,12 @@ public class FanBanner {
                     fanBannerListener.onImpressionLogged();
             }
             
-            AdView.AdViewLoadConfig loadAdConfig = adView.buildLoadAdConfig()
+        };
+	    
+	    AdView.AdViewLoadConfig loadAdConfig = adView.buildLoadAdConfig()
               .withAdListener(adListener)
               .build();
 	        adView.loadAd(loadAdConfig);
-        });
 
         // Check if Ad is Banned
         if (!AdLimitUtils.isBanned(context, placementId)) {
@@ -138,7 +139,7 @@ public class FanBanner {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    adView.loadAd();
+                    adView.loadAd(loadAdConfig);
                 }
             }, PrefUtils.getInstance().init(context, placementId).getDelayMs());
         } else {
