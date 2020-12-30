@@ -3,11 +3,7 @@ package anti.ad.limit.fan;
 import android.content.Context;
 import android.util.Log;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
+import com.facebook.ads.*;
 
 import android.os.Handler;
 import android.view.View;
