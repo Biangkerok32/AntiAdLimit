@@ -26,7 +26,6 @@ public class FanInters {
     private boolean isAdBanned = false;
 
     private InterstitialAd interstitialAd;
-    private InterstitialAd.InterstitialLoadAdConfig loadAdConfig;
 
     public FanInters(final Context context) {
         this.context = context;
@@ -103,10 +102,11 @@ public class FanInters {
                 if (fanIntersLisntener != null)
                     fanIntersLisntener.onDismissed();
             }
-            InterstitialAd.InterstitialLoadAdConfig loadAdConfig = interstitialAd.buildLoadAdConfig()
+            
+        };
+        InterstitialAd.InterstitialLoadAdConfig loadAdConfig = interstitialAd.buildLoadAdConfig()
               .withAdListener(adListener)
               .build();
-        });
 
         // Check if Ad is Banned
         if (!AdLimitUtils.isBanned(context, unitId)) {
